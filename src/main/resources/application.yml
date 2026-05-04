@@ -1,0 +1,39 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: notification-service
+  jpa:
+    open-in-view: false
+  mail:
+    host: ${KC_SMTP_HOST:smtp.example.com}
+    port: ${KC_SMTP_PORT:465}
+    username: ${KC_SMTP_USER:noreply@example.com}
+    password: ${KC_SMTP_PASSWORD:replace_with_smtp_password}
+    properties:
+      mail:
+        smtp:
+          auth: ${KC_SMTP_AUTH:true}
+          ssl:
+            enable: ${KC_SMTP_SSL:true}
+          starttls:
+            enable: ${KC_SMTP_STARTTLS:false}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{requestId}] %-5level %logger{36} - %msg%n"
+
+app:
+  kafka:
+    topics:
+      notification-events: notification-events
+  mail:
+    from: ${KC_SMTP_FROM:noreply@example.com}
+    from-display-name: ${KC_SMTP_FROM_DISPLAY_NAME:Game Platform}
