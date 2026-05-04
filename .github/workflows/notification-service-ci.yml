@@ -44,7 +44,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Gradle tests
-        run: ./gradlew test --no-daemon -Dspring.profiles.active=local
+        run: ./gradlew test --no-daemon
 
   migration-check:
     name: Check Flyway Migrations
