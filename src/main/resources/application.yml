@@ -24,7 +24,10 @@ management:
   endpoints:
     web:
       exposure:
-        include: health
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
 
 logging:
   pattern:
@@ -37,3 +40,9 @@ app:
   mail:
     from: ${KC_SMTP_FROM:noreply@example.com}
     from-display-name: ${KC_SMTP_FROM_DISPLAY_NAME:Game Platform}
+
+sentry:
+  dsn: ${SENTRY_DSN:}
+  environment: ${SENTRY_ENVIRONMENT:local}
+  release: ${SENTRY_RELEASE:${spring.application.name}@local}
+  send-default-pii: false
